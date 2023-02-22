@@ -83,7 +83,7 @@ public class RegisterUserTest {
 
 
     @Given("Fill details: Title, Name, Email, Password, Date of birth")
-    public void fill_details_Title_Name_Email_Password_Date_of_birth(List<Map<String, String>> data) throws InterruptedException {
+    public void fill_details_Title_Name_Email_Password_Date_of_birth(List<Map<String, String>> data) {
         Map<String, String> info = data.get(0);
 
         String password = info.get("password");
@@ -93,7 +93,7 @@ public class RegisterUserTest {
 
         driver.findElement(By.xpath("//input[@id='id_gender1']")).click();//clicking on Mr.
         driver.findElement(By.xpath("//input[@id='password']")).sendKeys(password);
-        Thread.sleep(2_000);
+
         WebElement days = driver.findElement(By.id("days"));
         Select select = new Select(days);
         select.selectByVisibleText(day);
@@ -113,28 +113,56 @@ public class RegisterUserTest {
 
     @Then("Select checkbox Receive special offers from our partners!")
     public void selectCheckboxReceiveSpecialOffersFromOurPartners() {
+        driver.findElement(By.id("optin")).click();
     }
 
     @And("Fill details: First name, Last name, Company, Address, Address2, Country, State, City, Zipcode, Mobile Number")
-    public void fill_details_First_name_Last_name_Company_Address_Address2_Country_State_City_Zipcode_Mobile_Number(io.cucumber.datatable.DataTable dataTable) {
+    public void fill_details_First_name_Last_name_Company_Address_Address2_Country_State_City_Zipcode_Mobile_Number(List<Map<String, String>> data) {
+        Map<String, String> info = data.get(0);
+        String firstName = info.get("firstName");
+        String lastName = info.get("lastName");
+        String company = info.get("Company");
+        String address = info.get("Address");
+        String address2 = info.get("Address2");
+        String country = info.get("Country");
+        String state = info.get("State");
+        String city = info.get("City");
+        String zip = info.get("Zip");
+        String mobileNumber = info.get("MobileNumber");
+
+
+        driver.findElement(By.id("first_name")).sendKeys(firstName);
+        driver.findElement(By.id("last_name")).sendKeys(lastName);
+        driver.findElement(By.id("company")).sendKeys(company);
+        driver.findElement(By.id("address1")).sendKeys(address);
+        driver.findElement(By.id("address2")).sendKeys(address2);
+        driver.findElement(By.id("country")).sendKeys(country);
+        driver.findElement(By.id("state")).sendKeys(state);
+        driver.findElement(By.id("city")).sendKeys(city);
+        driver.findElement(By.id("zipcode")).sendKeys(zip);
+        driver.findElement(By.id("mobile_number")).sendKeys(mobileNumber);
 
     }
 
 
     @When("Click Create Account button")
     public void clickCreateAccountButton() {
+        driver.findElement(By.xpath("//button[normalize-space()='Create Account']")).click();
     }
     @And("Verify that ACCOUNT CREATED! is visible")
     public void verifyThatACCOUNTCREATEDIsVisible() {
+        Assert.assertTrue(driver.findElement(By.xpath("//b[normalize-space()='Account Created!']")).isDisplayed());
     }
 
     @Then("Click Continue button")
     public void clickContinueButton() {
+        driver.findElement(By.xpath("//div/a[@data-qa='continue-button']")).click();
     }
 
 
     @And("Verify that Logged in as username is visible")
     public void verifyThatLoggedInAsUsernameIsVisible() {
+
     }
 
 

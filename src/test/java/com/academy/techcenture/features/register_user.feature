@@ -10,8 +10,8 @@ Feature: test register user functionality
    And Click Signup button
    Then Verify that ENTER ACCOUNT INFORMATION is visible
    Given Fill details: Title, Name, Email, Password, Date of birth
-    |password  |day|month|year|
-    |pasword123|25 |March|1988|
+    |password   |day|month|year|
+    |password123|25 |March|1988|
    When Select checkbox Sign up for our newsletter!
    Then Select checkbox Receive special offers from our partners!
    And Fill details: First name, Last name, Company, Address, Address2, Country, State, City, Zipcode, Mobile Number
