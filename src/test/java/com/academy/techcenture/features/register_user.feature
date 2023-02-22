@@ -6,7 +6,7 @@ Feature: test register user functionality
    And Verify that home page is visible successfully
    Then Click on Signup button
    Given Verify New User Signup! is visible
-   When Enter "Mike Smit" and "mike.smit@gmail.com" address
+   When Enter "Kevin Lee" and "kevin.lee@gmail.com" address
    And Click Signup button
    Then Verify that ENTER ACCOUNT INFORMATION is visible
    Given Fill details: Title, Name, Email, Password, Date of birth

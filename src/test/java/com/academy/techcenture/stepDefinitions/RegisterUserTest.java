@@ -171,10 +171,10 @@ public class RegisterUserTest {
     @And("Verify that Logged in as {string} is visible")
     public void verifyThatLoggedInAsUsernameIsVisible(String username) {
             WebElement loginName = driver.findElement(By.xpath("//a/i[@class='fa fa-user']/following-sibling::b"));
-            Assert.assertEquals(username, loginName);
+            Assert.assertEquals(username, loginName.getText());
+
+
 
     }
-
-
 
 }
