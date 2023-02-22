@@ -13,8 +13,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
-
-import java.sql.Driver;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
@@ -167,9 +165,6 @@ public class RegisterUserTest {
     @Then("Click Continue button")
     public void clickContinueButton() {
         driver.findElement(By.xpath("//div/a[@data-qa='continue-button']")).click();
-//        driver.switchTo().alert();
-//
-//        driver.findElement(By.id("//div[@id='dismiss-button']/div")).click();//pop out
     }
 
 
