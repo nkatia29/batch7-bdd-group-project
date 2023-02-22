@@ -10,10 +10,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.sql.Driver;
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +29,14 @@ public class RegisterUserTest {
 
         if(browser.equals("chrome")){
             WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver() ;
+            ChromeOptions options = new ChromeOptions();
+            Map<String, Object> prefs = new HashMap<String, Object>();
+            prefs.put("autofill.profile_enabled", false);
+            prefs.put("profile.password_manager_enabled", false);
+            prefs.put("profile.default_content_setting_values.notifications", 2);
+            prefs.put("profile.managed_default_content_settings.javascript",2);
+            options.setExperimentalOption("prefs", prefs);
+            driver = new ChromeDriver(options);
         }
         else if (browser.equals("firefox")){
             WebDriverManager.firefoxdriver().setup();
@@ -157,11 +167,16 @@ public class RegisterUserTest {
     @Then("Click Continue button")
     public void clickContinueButton() {
         driver.findElement(By.xpath("//div/a[@data-qa='continue-button']")).click();
+//        driver.switchTo().alert();
+//
+//        driver.findElement(By.id("//div[@id='dismiss-button']/div")).click();//pop out
     }
 
 
-    @And("Verify that Logged in as username is visible")
-    public void verifyThatLoggedInAsUsernameIsVisible() {
+    @And("Verify that Logged in as {string} is visible")
+    public void verifyThatLoggedInAsUsernameIsVisible(String username) {
+            WebElement loginName = driver.findElement(By.xpath("//a/i[@class='fa fa-user']/following-sibling::b"));
+            Assert.assertEquals(username, loginName);
 
     }
 
