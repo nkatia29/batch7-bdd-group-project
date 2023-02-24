@@ -1,51 +1,45 @@
 package com.academy.techcenture.stepDefinitions;
 
+import com.academy.techcenture.config.ConfigReader;
+import com.academy.techcenture.driver.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.io.File;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RegisterUserTest {
-    private WebDriver driver;
+public class AllTestCases {
+    private static WebDriver driver;
+    private File file;
+
+    private Alert alert;
 
 
-    @Given("Launch browser {string} and Navigate to  {string}")
-    public void launchBrowserAndNavigateTo(String browser, String url) {
 
-        if(browser.equals("chrome")){
-            WebDriverManager.chromedriver().setup();
-            ChromeOptions options = new ChromeOptions();
-            Map<String, Object> prefs = new HashMap<String, Object>();
-            prefs.put("autofill.profile_enabled", false);
-            prefs.put("profile.password_manager_enabled", false);
-            prefs.put("profile.default_content_setting_values.notifications", 2);
-            prefs.put("profile.managed_default_content_settings.javascript",2);
-            options.setExperimentalOption("prefs", prefs);
-            driver = new ChromeDriver(options);
-        }
-        else if (browser.equals("firefox")){
-            WebDriverManager.firefoxdriver().setup();
-            driver =  new FirefoxDriver();
-        }
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
-        driver.manage().window().maximize();
-        driver.get(url);
+//    @Given("Launch browser {string} and Navigate to  {string}")
+//    public void launch_browser_and_Navigate_to() {
+    @Given("Launch browser chrome and Navigate to automationexercise.com")
+    public void launchBrowserChromeAndNavigateToAutomationexerciseCom() {
+        driver = Driver.getDriver();
+        driver.get(ConfigReader.getProperty("url"));
     }
-
 
     @And("Verify that home page is visible successfully")
     public void verify_that_home_page_is_visible_successfully() {
@@ -256,24 +250,28 @@ public class RegisterUserTest {
 
     @Then("Upload file")
     public void upload_file() {
-
+        WebElement uploadFileBtn = driver.findElement(By.name("upload_file"));
+        String filepath = "/Users/fazilat/IdeaProjects/batch7-bdd-group-project/src/main/resources/some-file (2).txt";
+        uploadFileBtn.sendKeys(filepath);
     }
-
 
 
     @Then("Click Submit button")
     public void click_Submit_button() {
-
+        driver.findElement(By.xpath("//input[@data-qa='submit-button']")).click();
     }
 
     @When("Click OK button")
     public void click_OK_button() {
 
+         alert = driver.switchTo().alert();
+         alert.accept();
     }
 
     @Then("Verify success message Success! Your details have been submitted successfully. is visible")
     public void verify_success_message_Success_Your_details_have_been_submitted_successfully_is_visible() {
-
+        WebElement successMsg = driver.findElement(By.xpath("//div[@class='status alert alert-success']"));
+        Assert.assertTrue(successMsg.isDisplayed());
     }
 
     @Then("Click Home button and verify that landed to home page successfully")
@@ -281,4 +279,164 @@ public class RegisterUserTest {
 
     }
 
+    @Then("Add products to cart")
+    public void addProductsToCart() {
+        driver.findElement(By.xpath("(//a[contains(text(),'View Product')])[1]")).click();
+        driver.findElement(By.xpath("//button[@type='button']")).click();
+    }
+
+//Download invoice test
+    @Given("Click Cart button")
+    public void clickCartButton() {
+        driver.findElement(By.xpath("//u[normalize-space()='View Cart']")).click();
+    }
+
+    @And("Verify that cart page is displayed")
+    public void verifyThatCartPageIsDisplayed() {
+        WebElement shoppingCartText = driver.findElement(By.xpath("//li[@class='active' and text()='Shopping Cart']"));
+        Assert.assertEquals("Shopping Cart",shoppingCartText.getText());
+    }
+
+    @And("Click Proceed To Checkout")
+    public void clickProceedToCheckout() {
+        driver.findElement(By.xpath("//a[normalize-space()='Proceed To Checkout']")).click();
+    }
+
+    @Then("Click Register button")
+    public void clickRegisterButton() {
+        driver.findElement(By.xpath("//u[normalize-space()='Register / Login']")).click();
+
+    }
+
+    @When("Fill all details in Signup and create account")
+    public void fillAllDetailsInSignupAndCreateAccount(List<Map<String, String>> data) {
+        Map<String, String> info = data.get(0);
+        String name = info.get("name");
+        String email = info.get("email");
+        driver.findElement(By.xpath("//input[@name='name']")).sendKeys(name);
+        driver.findElement(By.xpath("//input[@data-qa='signup-email']")).sendKeys(email);
+        driver.findElement(By.xpath("//button[text()='Signup']")).click();
+
+        String password = info.get("password");
+        String day = info.get("day");
+        String month = info.get("month");
+        String year = info.get("year");
+
+        driver.findElement(By.xpath("//input[@id='id_gender1']")).click();//clicking on Mr.
+        driver.findElement(By.xpath("//input[@id='password']")).sendKeys(password);
+
+        WebElement days = driver.findElement(By.id("days"));
+        Select select = new Select(days);
+        select.selectByVisibleText(day);
+        WebElement months = driver.findElement(By.id("months"));
+        Select select1 = new Select(months);
+        select1.selectByVisibleText(month);
+        WebElement years = driver.findElement(By.id("years"));
+        Select select2 = new Select(years);
+        select2.selectByVisibleText(year);
+
+        String firstName = info.get("firstName");
+        String lastName = info.get("lastName");
+        String address = info.get("address");
+        String country = info.get("country");
+        String state = info.get("state");
+        String city = info.get("city");
+        String zip = info.get("zip");
+        String mobileNumber = info.get("cell");
+
+
+        driver.findElement(By.id("first_name")).sendKeys(firstName);
+        driver.findElement(By.id("last_name")).sendKeys(lastName);
+        driver.findElement(By.id("address1")).sendKeys(address);
+        driver.findElement(By.id("country")).sendKeys(country);
+        driver.findElement(By.id("state")).sendKeys(state);
+        driver.findElement(By.id("city")).sendKeys(city);
+        driver.findElement(By.id("zipcode")).sendKeys(zip);
+        driver.findElement(By.id("mobile_number")).sendKeys(mobileNumber);
+
+        WebElement submitBtn = driver.findElement(By.xpath("//button[text()='Create Account']"));
+        submitBtn.click();
+
+    }
+
+    @Then("Verify ACCOUNT CREATED! and click Continue button")
+    public void verifyACCOUNTCREATEDAndClickContinueButton() {
+        WebElement text = driver.findElement(By.xpath("//b[normalize-space()='Account Created!']"));
+        Assert.assertTrue(text.isDisplayed());
+        driver.findElement(By.xpath("//a[normalize-space()='Continue']")).click();
+
+    }
+
+    @Given("Verify Logged in as {string} at top")
+    public void verifyLoggedInAsAtTop(String username) {
+        WebElement loginName = driver.findElement(By.xpath("//a/i[@class='fa fa-user']/following-sibling::b"));
+        Assert.assertEquals(username, loginName.getText());
+    }
+    @Then("Click Cart btn")
+    public void clickCartBtn() {
+        driver.findElement(By.xpath("//a[normalize-space()='Cart']//i[@class='fa fa-shopping-cart']")).click();
+    }
+
+    @Then("Click Proceed To Checkout button")
+    public void clickProceedToCheckoutButton() {
+        driver.findElement(By.xpath("//a[normalize-space()='Proceed To Checkout']")).click();
+    }
+
+    @When("Verify Address Details and Review Your Order")
+    public void verifyAddressDetailsAndReviewYourOrder() {
+
+    }
+
+    @And("Enter description in comment text area and click Place Order")
+    public void enterDescriptionInCommentTextAreaAndClickPlaceOrder() {
+        driver.findElement(By.id("ordermsg")).sendKeys("some message");
+        driver.findElement(By.xpath("//a[normalize-space()='Place Order']")).click();
+
+    }
+
+    @Given("Enter payment details: Name on Card, Card Number, CVC, Expiration date")
+    public void enterPaymentDetailsNameOnCardCardNumberCVCExpirationDate(List<Map<String, String>> data) {
+        Map<String, String> info = data.get(0);
+        String nameOnCard = info.get("name");
+        String cardNumber = info.get("cardNumber");
+        String cvc = info.get("cvc");
+        String expDate = info.get("expDate");
+        String year = info.get("year");
+
+        driver.findElement(By.name("name_on_card")).sendKeys(nameOnCard);
+        driver.findElement(By.name("card_number")).sendKeys(cardNumber);
+        driver.findElement(By.name("cvc")).sendKeys(cvc);
+        driver.findElement(By.name("expiry_month")).sendKeys(expDate);
+        driver.findElement(By.name("expiry_year")).sendKeys(year);
+    }
+
+    @When("Click Pay and Confirm Order button")
+    public void clickPayAndConfirmOrderButton() {
+        driver.findElement(By.xpath("//button[@id='submit']")).click();
+    }
+
+    @Then("Verify success message Your order has been placed successfully!")
+    public void verifySuccessMessageYourOrderHasBeenPlacedSuccessfully() {
+        try{
+            WebDriverWait wait = new WebDriverWait(driver,20);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Your order has been placed successfully!')]")));
+        }catch(Throwable e){
+            System.err.println("Error while waiting for the notification to appear: "+ e.getMessage());
+        }
+
+    }
+
+    @And("Click Download Invoice button and verify invoice is downloaded successfully.")
+    public void clickDownloadInvoiceButtonAndVerifyInvoiceIsDownloadedSuccessfully() {
+        driver.findElement(By.xpath("//a[normalize-space()='Download Invoice']")).click();
+
+        file= new File("\"C:\\Users\\nkati\\Downloads\\invoice.txt\"");
+        file.exists();
+
+    }
+
+
 }
+
+
+
