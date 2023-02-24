@@ -9,19 +9,29 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+
 
 public class TestCases6_12 {
-    WebDriver driver;
+    private  WebDriver driver;
+    private WebDriverWait wait;
     private File file;
     private Alert alert;
+    public TestCases6_12(WebDriver driver){
+        this.driver = driver;
+        this.wait= new WebDriverWait(this.driver, Duration.ofSeconds(20));
+        PageFactory.initElements(driver, this);
+
+    }
+
 
 
     @When("Click on Contact Us button")
@@ -228,7 +238,7 @@ public class TestCases6_12 {
     @Then("Verify success message Your order has been placed successfully!")
     public void verifySuccessMessageYourOrderHasBeenPlacedSuccessfully() {
         try{
-            WebDriverWait wait = new WebDriverWait(driver,20);
+            wait = new WebDriverWait(driver,20);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Your order has been placed successfully!')]")));
         }catch(Throwable e){
             System.err.println("Error while waiting for the notification to appear: "+ e.getMessage());

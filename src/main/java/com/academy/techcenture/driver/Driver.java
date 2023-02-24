@@ -33,7 +33,7 @@ public class Driver {
             prefs.put("autofill.profile_enabled", false);
             prefs.put("profile.password_manager_enabled", false);
            prefs.put("profile.default_content_setting_values.notifications", 2);
-           prefs.put("profile.managed_default_content_settings.javascript",2);
+          // prefs.put("profile.managed_default_content_settings.javascript",2);
             options.setExperimentalOption("prefs", prefs);
             driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("firefox")) {

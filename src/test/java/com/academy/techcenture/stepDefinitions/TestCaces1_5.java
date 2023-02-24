@@ -10,12 +10,35 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 
 public class TestCaces1_5 {
-    private WebDriver driver;
+    private static WebDriver driver;
+    private WebDriverWait wait;
+
+    public TestCaces1_5(WebDriver driver){
+        this.driver = driver;
+        this.wait= new WebDriverWait(this.driver, Duration.ofSeconds(20));
+        PageFactory.initElements(driver, this);
+
+    }
+  @FindBy (xpath = "//button[text()='Signup']")
+  public WebElement signUpBtn;
+  @FindBy (xpath ="//a[normalize-space()='Signup / Login']" )
+  public WebElement signUpLoginBtn;
+  @FindBy (xpath = "//h2[normalize-space()='New User Signup!']")
+  public WebElement newUserVisibleTxt;
+  @FindBy (xpath = "//input[@name='name']")
+  public WebElement fullName;
+  @FindBy(xpath = "//input[@data-qa='signup-email']")
+  public WebElement eMail;
 
     @Given("Launch browser chrome and Navigate to automationexercise.com")
     public void launchBrowserChromeAndNavigateToAutomationexerciseCom() {
@@ -31,26 +54,22 @@ public class TestCaces1_5 {
 
     @Then("Click on Signup button")
     public void clickOnSignupLoginButton() {
-        driver.findElement(By.xpath("//a[normalize-space()='Signup / Login']")).click();
+        signUpLoginBtn.click();
     }
 
     @Given("Verify New User Signup! is visible")
     public void verifyNewUserTextIsVisible() {
-
-        WebElement text = driver.findElement(By.xpath("//h2[normalize-space()='New User Signup!']"));
-        Assert.assertTrue(text.isDisplayed());
+        Assert.assertTrue(newUserVisibleTxt.isDisplayed());
     }
 
     @When("Enter {string} and {string} address")
     public void enter_and_address(String name, String email) {
-        WebElement fullName = driver.findElement(By.xpath("//input[@name='name']"));
-        WebElement eMail = driver.findElement(By.xpath("//input[@data-qa='signup-email']"));
         fullName.sendKeys(name); eMail.sendKeys(email);
     }
 
     @And("Click Signup button")
     public void clickSignupButton() throws InterruptedException {
-        driver.findElement(By.xpath("//button[text()='Signup']")).click();
+        signUpBtn.click();
         Thread.sleep(1_000);
 
     }
@@ -180,13 +199,13 @@ public class TestCaces1_5 {
         emailInput.sendKeys(email);
         passwordInput.sendKeys(password);
     }
-
+// Scenario: Negative scenario  with incorrect email and password
     @Then("Verify error Your email or password is incorrect! is visible")
     public void verify_error_Your_email_or_password_is_incorrect_is_visible() {
         WebElement errorText = driver.findElement(By.xpath("//p[text ()='Your email or password is incorrect!']"));
         Assert.assertTrue(errorText.isDisplayed());
     }
-
+// Scenario: Logout User
     @Then("Click Logout account button")
     public void click_Logout_account_button() {
    driver.findElement(By.xpath("//a[@href='/logout']")).click();
