@@ -173,8 +173,8 @@ public class RegisterUserTest {
             WebElement loginName = driver.findElement(By.xpath("//a/i[@class='fa fa-user']/following-sibling::b"));
             Assert.assertEquals(username, loginName.getText());
 
-
-
     }
+
+
 
 }
