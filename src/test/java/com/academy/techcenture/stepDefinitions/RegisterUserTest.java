@@ -58,8 +58,6 @@ public class RegisterUserTest {
         driver.findElement(By.xpath("//a[normalize-space()='Signup / Login']")).click();
     }
 
-
-
     @Given("Verify New User Signup! is visible")
     public void verifyNewUserTextIsVisible() {
 
@@ -174,7 +172,113 @@ public class RegisterUserTest {
             Assert.assertEquals(username, loginName.getText());
 
     }
+    @When("Verify Login to your account is visible")
+    public void verifyLoginToYourAccountIsVisible() {
+        WebElement verifyLoginBtn = driver.findElement(By.xpath("//div[@class='login-form']/h2"));
+        Assert.assertTrue(verifyLoginBtn.isDisplayed());
+    }
+
+    @Then("Enter  {string} email and {string} password correctly")
+    public void enterEmailAndPasswordCorrectly(String email, String password) {
+
+        WebElement emailInput = driver.findElement(By.xpath("//input[@data-qa='login-email']"));
+        WebElement passwordInput = driver.findElement(By.xpath("//input[@placeholder='Password']"));
+        emailInput.sendKeys(email);
+        passwordInput.sendKeys(password);
+    }
+
+    @Then("Click login button")
+    public void click_login_button() {
+        driver.findElement(By.xpath("//button[@data-qa='login-button']")).click();
+    }
+
+    @Then("Verify that Logged in as username is visible")
+    public void verify_that_Logged_in_as_username_is_visible() {
+        WebElement loggedInText = driver.findElement(By.xpath("//li[10]//a[1]"));
+        Assert.assertTrue(loggedInText.isDisplayed());
+    }
+    @Then("Enter {string} email address and {string} incorrect password")
+    public void enter_email_address_and_incorrect_password(String email, String password) {
+        WebElement emailInput = driver.findElement(By.xpath("//input[@data-qa='login-email']"));
+        WebElement passwordInput = driver.findElement(By.xpath("//input[@placeholder='Password']"));
+        emailInput.sendKeys(email);
+        passwordInput.sendKeys(password);
+    }
+
+    @Then("Verify error Your email or password is incorrect! is visible")
+    public void verify_error_Your_email_or_password_is_incorrect_is_visible() {
+        WebElement errorText = driver.findElement(By.xpath("//p[text ()='Your email or password is incorrect!']"));
+        Assert.assertTrue(errorText.isDisplayed());
+    }
+
+    @Then("Click Logout account button")
+    public void click_Logout_account_button() {
+   driver.findElement(By.xpath("//a[@href='/logout']")).click();
+    }
+
+    @Then("Verify that user is navigated to login page")
+    public void verifyThatUserIsNavigatedToLoginPage() {
+        String loginPageTitle = driver.getTitle();
+        Assert.assertEquals("Automation Exercise - Signup / Login", loginPageTitle);
+    }
 
 
+    @When("Click on Contact Us button")
+    public void click_on_Contact_Us_button() {
+        WebElement contactUsBtn = driver.findElement(By.xpath("//a[@href='/contact_us']"));
+       contactUsBtn.click();
+    }
+
+    @Then("Verify GET IN TOUCH is visible")
+    public void verify_GET_IN_TOUCH_is_visible() {
+        WebElement getInTouchText = driver.findElement(By.xpath("//div[@class='contact-form']/ h2[@class='title text-center']"));
+        Assert.assertTrue(getInTouchText.isDisplayed());
+
+    }
+
+    @Then("Enter name, email, subject and message")
+    public void enter_name_email_subject_and_message(List<Map<String, String>> data) {
+        Map<String, String> getIntouchInfo = data.get(0);
+        String name = getIntouchInfo.get("name");
+        String email = getIntouchInfo.get("email");
+        String subject = getIntouchInfo.get("subject");
+        String message = getIntouchInfo.get("message");
+
+        driver.findElement(By.xpath("//input[@placeholder='Name']"))
+                .sendKeys(name);
+        driver.findElement(By.xpath("//input[@placeholder='Email']"))
+                .sendKeys(email);
+        driver.findElement(By.xpath("//input[@placeholder='Subject']"))
+                .sendKeys(subject);
+        driver.findElement(By.xpath("//textarea[@id='message']"))
+                .sendKeys(message);
+    }
+
+    @Then("Upload file")
+    public void upload_file() {
+
+    }
+
+
+
+    @Then("Click Submit button")
+    public void click_Submit_button() {
+
+    }
+
+    @When("Click OK button")
+    public void click_OK_button() {
+
+    }
+
+    @Then("Verify success message Success! Your details have been submitted successfully. is visible")
+    public void verify_success_message_Success_Your_details_have_been_submitted_successfully_is_visible() {
+
+    }
+
+    @Then("Click Home button and verify that landed to home page successfully")
+    public void click_Home_button_and_verify_that_landed_to_home_page_successfully() {
+
+    }
 
 }

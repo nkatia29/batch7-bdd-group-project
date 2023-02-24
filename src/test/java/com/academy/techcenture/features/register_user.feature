@@ -1,10 +1,13 @@
-Feature: test register user functionality
+Feature: test register and login user functionality
+
+ Background:
+  Given Launch browser "chrome" and Navigate to  "http://automationexercise.com"
+  And Verify that home page is visible successfully
+  Then Click on Signup button
+  When Verify Login to your account is visible
+
 
   Scenario: register user functionality
-
-   Given Launch browser "chrome" and Navigate to  "http://automationexercise.com"
-   And Verify that home page is visible successfully
-   Then Click on Signup button
    Given Verify New User Signup! is visible
    When Enter "Kevin Lee" and "kevin.lee@gmail.com" address
    And Click Signup button
@@ -22,4 +25,35 @@ Feature: test register user functionality
    Then Click Continue button
    And Verify that Logged in as "Kevin Lee" is visible
 
+
+ Scenario: Positive scenario with correct email and password
+ Then  Enter  "kevin.lee@gmail.com" email and "password123" password correctly
+  Then Click login button
+ Then Verify that Logged in as username is visible
+
+ Scenario: Negative scenario  with incorrect email and password
+ Then  Enter "kevin.lee@gmail.com" email address and "kevin123" incorrect password
+  Then Click login button
+ Then Verify error Your email or password is incorrect! is visible
+
+ Scenario: Logout User
+
+  Then  Enter  "kevin.lee@gmail.com" email and "password123" password correctly
+  Then Click login button
+  Then Verify that Logged in as username is visible
+  Then Click Logout account button
+ Then Verify that user is navigated to login page
+
+ Scenario: Contact Us Form
+
+ When Click on Contact Us button
+ Then Verify GET IN TOUCH is visible
+ Then Enter name, email, subject and message
+  |name |email              |subject       |message    |
+  |Kevin|kevin.lee@gmail.com|Products issue|Any message|
+ Then Upload file
+ Then Click Submit button
+ When Click OK button
+ Then Verify success message Success! Your details have been submitted successfully. is visible
+ Then Click Home button and verify that landed to home page successfully
 
