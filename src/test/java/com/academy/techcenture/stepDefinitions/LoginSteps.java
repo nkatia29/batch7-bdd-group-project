@@ -5,7 +5,7 @@ import com.academy.techcenture.driver.Driver;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebDriver;
 
-public class LoginTest {
+public class LoginSteps {
     private WebDriver driver = Driver.getDriver();
     private LoginPage loginPage;
 
@@ -29,7 +29,8 @@ public class LoginTest {
         loginPage.verify_that_Logged_in_as_username_is_visible();
     }
     // Scenario: Negative scenario  with incorrect email and password
-    @Then("Enter {string} email address and {string} incorrect passwordThen Click login button")
+
+    @Then("Enter {string} email address and {string} incorrect password")
     public void enterEmailAddressAndIncorrectPasswordThenClickLoginButton(String username, String password) {
         loginPage = new LoginPage(driver);;
         loginPage.enterEmailAddressAndIncorrectPasswordThenClickLoginButton(username, password);
@@ -40,17 +41,24 @@ public class LoginTest {
         loginPage = new LoginPage(driver);
         loginPage.verify_error_Your_email_or_password_is_incorrect_is_visible();
     }
-// Scenario: Logout User
 
+
+    // Scenario: Logout User
+    @Then("Enter  {string} email and {string} password correctly")
+    public void enterEmailAndPasswordCorrectly(String email, String pass) {
+        loginPage = new LoginPage(driver);
+        loginPage.enterEmailAndPasswordCorrectly(email, pass);
+
+}
     @Then("Click Logout account button")
     public void click_Logout_account_button() {
-        loginPage = new LoginPage(driver);
+
         loginPage.click_Logout_account_button();
     }
 
     @Then("Verify that user is navigated to login page")
     public void verifyThatUserIsNavigatedToLoginPage() {
-        loginPage = new LoginPage(driver);
+
         loginPage.verifyThatUserIsNavigatedToLoginPage();
     }
 

@@ -14,7 +14,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-public class DowloadInvoiceTest {
+public class DowloadInvoiceSteps {
     WebDriver driver;
     private WebDriverWait wait;
     File file;
@@ -32,19 +32,19 @@ public class DowloadInvoiceTest {
 
     @Given("Click Cart button")
     public void clickCartButton() {
-        downloadInvoicePage = new DownloadInvoicePage(driver, wait, file);
+
         downloadInvoicePage.clickCartButton();
     }
 
     @And("Verify that cart page is displayed")
     public void verifyThatCartPageIsDisplayed() {
-        downloadInvoicePage = new DownloadInvoicePage(driver, wait, file);
+
         downloadInvoicePage.verifyThatCartPageIsDisplayed();
     }
 
     @And("Click Proceed To Checkout")
     public void clickProceedToCheckout() {
-        downloadInvoicePage = new DownloadInvoicePage(driver, wait, file);
+
         downloadInvoicePage.clickProceedToCheckout();
     }
 

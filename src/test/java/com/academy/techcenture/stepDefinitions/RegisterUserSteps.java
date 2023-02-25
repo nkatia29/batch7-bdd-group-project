@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 import java.util.List;
 import java.util.Map;
 
-public class RegisterUserTest {
+public class RegisterUserSteps {
     private WebDriver driver;
     private RegisterUserPage userPage;
 

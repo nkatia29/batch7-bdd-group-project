@@ -34,7 +34,8 @@ Feature: log in functionality
 
  Scenario: Negative scenario  with incorrect email and password
 
- Then  Enter "kevin.lee@gmail.com" email address and "kevin123" incorrect passwordThen Click login button
+ Then  Enter "kevin.lee@gmail.com" email address and "kevin123" incorrect password
+  Then Click login button
  Then Verify error Your email or password is incorrect! is visible
 
  Scenario: Logout User
