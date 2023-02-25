@@ -1,4 +1,4 @@
-package com.academy.techcenture.stepDefinitions;
+package com.academy.techcenture.Hooks;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;

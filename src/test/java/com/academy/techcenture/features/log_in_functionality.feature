@@ -1,4 +1,4 @@
-Feature: tests 1-5 functionality
+Feature: log in functionality
 
  Background:
   Given Launch browser chrome and Navigate to automationexercise.com

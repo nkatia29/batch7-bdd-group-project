@@ -1,25 +1,10 @@
-Feature: tests 6-12 functionality
-
-  Background:
-    Given Launch browser chrome and Navigate to automationexercise.com
-    And Verify that home page is visible successfully
+Feature: dowload invoice functionality
 
 
+  Scenario: Download Invoice after purchase order
 
-Scenario:Contact Us Form
-When Click on Contact Us button
-Then Verify GET IN TOUCH is visible
-Then Enter name, email, subject and message
-|name |email              |subject       |message    |
-|Kevin|kevin.lee@gmail.com|Products issue|Any message|
-Then Upload file
-Then Click Submit button
-When Click OK button
-Then Verify success message Success! Your details have been submitted successfully. is visible
-Then Click Home button and verify that landed to home page successfully
-
-
-Scenario: Download Invoice after purchase order
+Given Launch browser chrome and Navigate to automationexercise.com
+And Verify that home page is visible successfully
 Then Add products to cart
 Given Click Cart button
 And Verify that cart page is displayed
