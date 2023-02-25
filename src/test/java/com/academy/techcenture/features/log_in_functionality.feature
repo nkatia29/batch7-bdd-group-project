@@ -27,8 +27,10 @@ Feature: log in functionality
 
 
  Scenario: Positive scenario with correct email and password
- Then  Enter  "kevin.lee@gmail.com" email and "password123" password correctlyThen Click login button
- Then Verify that Logged in as username is visible
+  Then  Enter username email and password correctly
+  Then Click login button
+  Then Verify that Logged in as username is visible
+
 
  Scenario: Negative scenario  with incorrect email and password
 

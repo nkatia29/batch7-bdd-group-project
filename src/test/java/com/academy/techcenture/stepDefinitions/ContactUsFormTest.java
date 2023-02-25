@@ -3,9 +3,7 @@ package com.academy.techcenture.stepDefinitions;
 import com.academy.techcenture.Pages.ContactUsFormPage;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
 import java.util.Map;
@@ -14,8 +12,8 @@ import java.util.Map;
 public class ContactUsFormTest {
 
 ContactUsFormPage contactUsFormPage;
-   private Alert alert;
-   WebDriver driver = new ChromeDriver();
+
+   WebDriver driver;
     @When("Click on Contact Us button")
     public void clickOnContactUsButton() {
       contactUsFormPage = new ContactUsFormPage(driver);

@@ -15,9 +15,9 @@ import java.util.List;
 import java.util.Map;
 
 public class DowloadInvoiceTest {
-    private  WebDriver driver;
+    WebDriver driver;
     private WebDriverWait wait;
-    private File file;
+    File file;
 
     private DownloadInvoicePage downloadInvoicePage;
 

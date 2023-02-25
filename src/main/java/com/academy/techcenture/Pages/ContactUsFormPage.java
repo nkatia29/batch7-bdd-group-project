@@ -1,5 +1,6 @@
 package com.academy.techcenture.Pages;
 
+import com.academy.techcenture.driver.Driver;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
@@ -13,14 +14,14 @@ import java.util.Map;
 public class ContactUsFormPage {
 
     private Alert alert;
-    private WebDriver driver;
+    private WebDriver driver = Driver.getDriver();
 
     public ContactUsFormPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
     }
 
-  @FindBy (xpath = "a[href='/contact_us'])")
+  @FindBy (xpath = "//a[href='/contact_us'])")
     public WebElement contactUsBtn;
   @FindBy (xpath = "//div[@class='contact-form']/ h2[@class='title text-center']")
     public WebElement getInTouchText;
@@ -32,7 +33,7 @@ public class ContactUsFormPage {
     public WebElement subjectInput;
    @FindBy (xpath = "//textarea[@id='message']")
     public WebElement msgInput;
-   @FindBy (name = "upload_file")
+    @FindBy (name = "upload_file")
     public WebElement uploadFileBtn;
     @FindBy (xpath = "//input[@data-qa='submit-button']")
     public WebElement submitBtn;
@@ -93,7 +94,7 @@ public class ContactUsFormPage {
     public void click_Home_button_and_verify_that_landed_to_home_page_successfully() {
 
 
-
+     Driver.quitDriver();
     }
 
 

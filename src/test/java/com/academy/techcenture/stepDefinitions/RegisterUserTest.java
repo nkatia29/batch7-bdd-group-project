@@ -1,5 +1,6 @@
 package com.academy.techcenture.stepDefinitions;
 
+import com.academy.techcenture.Pages.LoginPage;
 import com.academy.techcenture.Pages.RegisterUserPage;
 import com.academy.techcenture.config.ConfigReader;
 import com.academy.techcenture.driver.Driver;
@@ -15,23 +16,27 @@ public class RegisterUserTest {
     private WebDriver driver;
     private RegisterUserPage userPage;
 
+    private LoginPage loginPage;
+
     @Given("Launch browser chrome and Navigate to automationexercise.com")
     public void launchBrowserChromeAndNavigateToAutomationexerciseCom() {
+        System.out.println("Step 0");
         driver = Driver.getDriver();
+        System.out.println("Step 1");
         driver.get(ConfigReader.getProperty("url"));
     }
 
     @And("Verify that home page is visible successfully")
     public void verify_that_home_page_is_visible_successfully() {
         userPage = new RegisterUserPage(driver);
+        System.out.println("Step 2");
         userPage.getTitleOnHomePage();
-
     }
 
 
     @Then("Click on Signup button")
     public void clickOnSignupLoginButton() {
-        userPage = new RegisterUserPage(driver);
+       // userPage = new RegisterUserPage(driver);
         userPage.clickOnSignupLoginButton();
     }
 
@@ -117,7 +122,13 @@ public class RegisterUserTest {
     }
     @When("Verify Login to your account is visible")
     public void verifyLoginToYourAccountIsVisible() {
-        userPage = new RegisterUserPage(driver);
+        //userPage = new RegisterUserPage(driver);
         userPage.verifyLoginToYourAccountIsVisible();
+    }
+
+    @Then("Enter username email and password correctly")
+    public void enter_username_email_and_password_correctly() {
+        loginPage = new LoginPage(driver);
+        loginPage.enterEmailAndPasswordCorrectly("kevin.lee@gmail.com","kevin123");
     }
 }

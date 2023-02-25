@@ -1,5 +1,6 @@
 package com.academy.techcenture.Pages;
 
+import com.academy.techcenture.driver.Driver;
 import io.cucumber.java.en.And;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -16,7 +17,7 @@ import java.util.Map;
 
 public class DownloadInvoicePage {
 
-    private  WebDriver driver;
+    private  WebDriver driver = Driver.getDriver();
     private WebDriverWait wait;
     private File file;
 
@@ -197,6 +198,8 @@ public class DownloadInvoicePage {
 
         file= new File("\"C:\\Users\\nkati\\Downloads\\invoice.txt\"");
         file.exists();
+
+        Driver.quitDriver();
 
     }
 

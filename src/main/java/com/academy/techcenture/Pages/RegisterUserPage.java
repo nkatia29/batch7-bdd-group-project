@@ -1,5 +1,6 @@
 package com.academy.techcenture.Pages;
 
+import com.academy.techcenture.driver.Driver;
 import com.github.javafaker.Faker;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -15,7 +16,7 @@ import java.util.Map;
 
 public class RegisterUserPage {
     Faker faker;
-    private WebDriver driver;
+    private WebDriver driver = Driver.getDriver();
 
     public RegisterUserPage(WebDriver driver){
         this.driver = driver;
@@ -158,6 +159,7 @@ public class RegisterUserPage {
     public void verifyLoginToYourAccountIsVisible() {
         WebElement verifyLoginBtn = driver.findElement(By.xpath("//div[@class='login-form']/h2"));
         Assert.assertTrue(verifyLoginBtn.isDisplayed());
+        Driver.quitDriver();
     }
 
 
