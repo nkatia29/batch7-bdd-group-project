@@ -10,61 +10,49 @@ public class LoginSteps {
     private LoginPage loginPage;
 
 
+    //Positive
+    @Then("Enter {string} and {string} correctly")
+    public void enterAndCorrectly(String email, String password) {
+        loginPage = new LoginPage(driver);
+        loginPage.enterCredentialsCorrectly(email, password);
+    }
 
-//Scenario: Positive scenario with correct email and password
+
     @Then("Click login button")
     public void click_login_button() {
-        loginPage = new LoginPage(driver);
         loginPage.click_login_button();
     }
 
-   @Then("Enter  {string} email and {string} password correctlyThen Click login button")
-   public void enterEmailAndPasswordCorrectlyThenClickLoginButton(String username, String password) {
-       loginPage = new LoginPage(driver);
-       loginPage.enterEmailAndPasswordCorrectlyThenClickLoginButton(username, password);
-   }
     @Then("Verify that Logged in as username is visible")
     public void verify_that_Logged_in_as_username_is_visible() {
-
         loginPage.verify_that_Logged_in_as_username_is_visible();
     }
-    // Scenario: Negative scenario  with incorrect email and password
 
+    //Negative
     @Then("Enter {string} email address and {string} incorrect password")
-    public void enterEmailAddressAndIncorrectPasswordThenClickLoginButton(String username, String password) {
-        loginPage = new LoginPage(driver);;
-        loginPage.enterEmailAddressAndIncorrectPasswordThenClickLoginButton(username, password);
+    public void enter_email_address_and_incorrect_password(String email, String password) {
+        loginPage = new LoginPage(driver);
+        loginPage.enterEmailAddressAndIncorrectPasswordThenClickLoginButton(email, password);
+
     }
 
     @Then("Verify error Your email or password is incorrect! is visible")
     public void verify_error_Your_email_or_password_is_incorrect_is_visible() {
-        loginPage = new LoginPage(driver);
         loginPage.verify_error_Your_email_or_password_is_incorrect_is_visible();
     }
 
+    //log out
 
-    // Scenario: Logout User
-    @Then("Enter  {string} email and {string} password correctly")
-    public void enterEmailAndPasswordCorrectly(String email, String pass) {
-        loginPage = new LoginPage(driver);
-        loginPage.enterEmailAndPasswordCorrectly(email, pass);
-
-}
     @Then("Click Logout account button")
     public void click_Logout_account_button() {
-
+        loginPage = new LoginPage(driver);
         loginPage.click_Logout_account_button();
     }
 
     @Then("Verify that user is navigated to login page")
-    public void verifyThatUserIsNavigatedToLoginPage() {
-
+    public void verify_that_user_is_navigated_to_login_page() {
         loginPage.verifyThatUserIsNavigatedToLoginPage();
     }
 
 
-
 }
-
-
-

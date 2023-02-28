@@ -1,5 +1,6 @@
 package com.academy.techcenture.Pages;
 
+import com.academy.techcenture.config.ConfigReader;
 import com.academy.techcenture.driver.Driver;
 import com.github.javafaker.Faker;
 import org.junit.Assert;
@@ -65,9 +66,12 @@ public class RegisterUserPage {
 
         name1 = faker.name().firstName();
         String emailAddress = faker.internet().emailAddress();
+        ConfigReader.setProperty(emailAddress,"email");
+        ConfigReader.setProperty(name1,"name");
 
         nameInput.sendKeys(name1);
         eMail.sendKeys(emailAddress);
+
     }
 
 
