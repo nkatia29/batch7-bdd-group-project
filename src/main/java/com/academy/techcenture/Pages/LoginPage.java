@@ -8,13 +8,14 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
-    private WebDriver driver;
+    private static WebDriver driver = Driver.getDriver();
 
     public LoginPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
     }
-
+    @FindBy (xpath = "//input[@placeholder='Name']")
+    public WebElement nameInput;
     @FindBy(xpath = "//input[@data-qa='login-email']")
     public  WebElement emailInput;
     @FindBy (xpath = "//input[@placeholder='Password']")
@@ -31,7 +32,7 @@ public class LoginPage {
 
 
     public void enterEmailAndPasswordCorrectly(String email, String password) {
-        emailInput.sendKeys(email);
+        nameInput.sendKeys(email);
         passwordInput.sendKeys(password);
     }
 
@@ -70,7 +71,7 @@ public class LoginPage {
         String loginPageTitle = driver.getTitle();
         Assert.assertEquals("Automation Exercise - Signup / Login", loginPageTitle);
 
-        Driver.quitDriver();
+
     }
 
 

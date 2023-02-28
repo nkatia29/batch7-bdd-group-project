@@ -17,18 +17,16 @@ import java.util.Map;
 
 public class DownloadInvoicePage {
 
-    private  WebDriver driver = Driver.getDriver();
+    private static WebDriver driver = Driver.getDriver();
     private WebDriverWait wait;
     private File file;
 
-    public DownloadInvoicePage(WebDriver driver, WebDriverWait wait, File file){
+    public DownloadInvoicePage(WebDriver driver){
         this.driver = driver;
-        this.wait = wait;
-        this.file = file;
         PageFactory.initElements(driver,this);
     }
 
-    @FindBy(xpath = "(//a[contains(text(),'View Product')])[1]")
+    @FindBy(xpath = "(//a[contains(text(),'View Product')])[2]")
     public WebElement viewProductBtn;
     @FindBy(xpath = "//button[@type='button']")
     public WebElement button;
@@ -50,22 +48,33 @@ public class DownloadInvoicePage {
     public WebElement downloadInvBtn;
     @FindBy (xpath = "//a[normalize-space()='Cart']//i[@class='fa fa-shopping-cart']")
     public WebElement clickCartBtn;
+    @FindBy (xpath = "(//a[contains(text(),'Add to cart')])[3]")
+    public  WebElement addToCartBtn;
+    @FindBy (xpath = "//u[normalize-space()='View Cart']")
+    public WebElement viewCartBtn;
+    @FindBy (xpath = "//a[normalize-space()='Cart']")
+    public WebElement cartLink;
 
-    public void addProductsToCart() {
-        viewProductBtn.click();
-        button.click();
+    public void addProductsToCart() throws InterruptedException {
+        Thread.sleep(1_000);
+        addToCartBtn.click();
+//        viewProductBtn.click();
+//        button.click();
     }
 
     public void clickCartButton() {
-        cartBtn.click();
+        viewProductBtn.click();
+        addToCartBtn.click();
+        //cartBtn.click();
     }
 
     public void verifyThatCartPageIsDisplayed() {
 
-        Assert.assertEquals("Shopping Cart",shoppingCartText.getText());
+        Assert.assertTrue(cartLink.isSelected());
     }
 
     public void clickProceedToCheckout() {
+
         proceedToCheckOutLink.click();
     }
 
@@ -199,7 +208,7 @@ public class DownloadInvoicePage {
         file= new File("\"C:\\Users\\nkati\\Downloads\\invoice.txt\"");
         file.exists();
 
-        Driver.quitDriver();
+
 
     }
 

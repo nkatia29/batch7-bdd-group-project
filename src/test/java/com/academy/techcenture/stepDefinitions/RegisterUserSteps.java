@@ -1,134 +1,106 @@
 package com.academy.techcenture.stepDefinitions;
 
-import com.academy.techcenture.Pages.LoginPage;
 import com.academy.techcenture.Pages.RegisterUserPage;
 import com.academy.techcenture.config.ConfigReader;
 import com.academy.techcenture.driver.Driver;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
+
 import java.util.List;
 import java.util.Map;
 
 public class RegisterUserSteps {
-    private WebDriver driver;
+    private static WebDriver driver = Driver.getDriver();
     private RegisterUserPage userPage;
 
-    private LoginPage loginPage;
-
     @Given("Launch browser chrome and Navigate to automationexercise.com")
-    public void launchBrowserChromeAndNavigateToAutomationexerciseCom() {
-        System.out.println("Step 0");
+    public void launch_browser_chrome_and_Navigate_to_automationexercise_com() {
         driver = Driver.getDriver();
-        System.out.println("Step 1");
         driver.get(ConfigReader.getProperty("url"));
+
     }
 
-    @And("Verify that home page is visible successfully")
-    public void verify_that_home_page_is_visible_successfully() {
+    @Given("Verify that home page is visible successfully")
+    public void verify_that_home_page_is_visible_successfully() throws InterruptedException {
         userPage = new RegisterUserPage(driver);
-        System.out.println("Step 2");
-        userPage.getTitleOnHomePage();
+        userPage.verify_that_home_page_is_visible_successfully();
     }
-
 
     @Then("Click on Signup button")
-    public void clickOnSignupLoginButton() {
-       // userPage = new RegisterUserPage(driver);
-        userPage.clickOnSignupLoginButton();
+    public void click_on_Signup_button() throws InterruptedException {
+      userPage.clickSignupButton();
+    }
+
+    @When("Verify Login to your account is visible")
+    public void verify_Login_to_your_account_is_visible() {
+
+        userPage.verify_Login_to_your_account_is_visible();
     }
 
     @Given("Verify New User Signup! is visible")
-    public void verifyNewUserTextIsVisible() {
-        userPage = new RegisterUserPage(driver);
-        userPage.verifyNewUserTextIsVisible();
-
+    public void verify_New_User_Signup_is_visible() {
+     userPage.verifyNewUserTextIsVisible();
     }
 
-    @When("Enter {string} and {string} address")
-    public void enter_and_address(String name, String email) {
-        userPage = new RegisterUserPage(driver);
-        userPage.enter_and_address(name,email);
-
+    @When("Enter name and  email address")
+    public void enter_name_and_email_address() {
+        userPage.enter_name_and_email_address();
     }
 
-    @And("Click Signup button")
-    public void clickSignupButton() throws InterruptedException {
-        userPage = new RegisterUserPage(driver);
-        userPage.clickSignupButton();
-        Thread.sleep(1_000);
-
+    @When("Click Signup button")
+    public void click_Signup_button() {
+       userPage.clickOnSignupLoginButton();
     }
 
     @Then("Verify that ENTER ACCOUNT INFORMATION is visible")
-    public void verifyThatIsVisible() throws InterruptedException {
-        Thread.sleep(2_000);
-        userPage = new RegisterUserPage(driver);
-        userPage.verifyThatIsVisible();
-
+    public void verify_that_ENTER_ACCOUNT_INFORMATION_is_visible() {
+        userPage.verifyThatACCOUNTCREATEDIsVisible();
     }
 
     @Given("Fill details: Title, Name, Email, Password, Date of birth")
     public void fill_details_Title_Name_Email_Password_Date_of_birth(List<Map<String, String>> data) {
-        userPage = new RegisterUserPage(driver);
-        userPage.fill_details_Title_Name_Email_Password_Date_of_birth(data);
-
+      userPage.fill_details_Title_Name_Email_Password_Date_of_birth(data);
     }
 
     @When("Select checkbox Sign up for our newsletter!")
-    public void selectCheckboxSignUpForOurNewsletter() {
-        userPage=new RegisterUserPage(driver);
-        userPage.selectCheckboxSignUpForOurNewsletter();
+    public void select_checkbox_Sign_up_for_our_newsletter() {
 
     }
+
 
     @Then("Select checkbox Receive special offers from our partners!")
-    public void selectCheckboxReceiveSpecialOffersFromOurPartners() {
-        userPage=new RegisterUserPage(driver);
-        userPage.selectCheckboxReceiveSpecialOffersFromOurPartners();
-
+    public void select_checkbox_Receive_special_offers_from_our_partners() {
+      userPage.selectCheckboxReceiveSpecialOffersFromOurPartners();
     }
 
-    @And("Fill details: First name, Last name, Company, Address, Address2, Country, State, City, Zipcode, Mobile Number")
+
+    @Then("Fill details: First name, Last name, Company, Address, Address2, Country, State, City, Zipcode, Mobile Number")
     public void fill_details_First_name_Last_name_Company_Address_Address2_Country_State_City_Zipcode_Mobile_Number(List<Map<String, String>> data) {
-        userPage = new RegisterUserPage(driver);
-        userPage.fill_details_First_name_Last_name_Company_Address_Address2_Country_State_City_Zipcode_Mobile_Number(data);
+      userPage.fill_details_First_name_Last_name_Company_Address_Address2_Country_State_City_Zipcode_Mobile_Number(data);
+    }
+    @When("Click Create Account button")
+    public void click_Create_Account_button() {
+       userPage.clickCreateAccountButton();
     }
 
-    @When("Click Create Account button")
-    public void clickCreateAccountButton() {
-        userPage = new RegisterUserPage(driver);
-        userPage.clickCreateAccountButton();
-    }
-    @And("Verify that ACCOUNT CREATED! is visible")
-    public void verifyThatACCOUNTCREATEDIsVisible() {
-        userPage = new RegisterUserPage(driver);
+    @When("Verify that ACCOUNT CREATED! is visible")
+    public void verify_that_ACCOUNT_CREATED_is_visible() {
         userPage.verifyThatACCOUNTCREATEDIsVisible();
     }
 
     @Then("Click Continue button")
-    public void clickContinueButton() {
-        userPage = new RegisterUserPage(driver);
+    public void click_Continue_button() {
         userPage.clickContinueButton();
     }
 
-    @And("Verify that Logged in as {string} is visible")
-    public void verifyThatLoggedInAsUsernameIsVisible(String username) {
-        userPage = new RegisterUserPage(driver);
-        userPage.verifyThatLoggedInAsUsernameIsVisible(username);
-
-    }
-    @When("Verify Login to your account is visible")
-    public void verifyLoginToYourAccountIsVisible() {
-        //userPage = new RegisterUserPage(driver);
-        userPage.verifyLoginToYourAccountIsVisible();
+    @Then("Verify that Logged in as {string} is visible")
+    public void verify_that_Logged_in_as_is_visible(String username) {
+      userPage.verifyThatLoggedInAsUsernameIsVisible(username);
     }
 
-    @Then("Enter username email and password correctly")
-    public void enter_username_email_and_password_correctly() {
-        loginPage = new LoginPage(driver);
-        loginPage.enterEmailAndPasswordCorrectly("kevin.lee@gmail.com","kevin123");
-    }
+
+
+
 }

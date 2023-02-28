@@ -7,7 +7,7 @@ Feature: register user functionality
     Then Click on Signup button
     When Verify Login to your account is visible
     Given Verify New User Signup! is visible
-    When Enter "Kevin Lee" and "kevin.lee@gmail.com" address
+    When Enter name and  email address
     And Click Signup button
     Then Verify that ENTER ACCOUNT INFORMATION is visible
     Given Fill details: Title, Name, Email, Password, Date of birth

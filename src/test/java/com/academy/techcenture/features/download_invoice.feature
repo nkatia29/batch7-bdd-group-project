@@ -1,4 +1,4 @@
-Feature: dowload invoice functionality
+Feature: download invoice functionality
 
 
   Scenario: Download Invoice after purchase order

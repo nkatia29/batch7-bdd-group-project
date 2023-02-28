@@ -5,7 +5,6 @@ import com.academy.techcenture.driver.Driver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
-
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +13,7 @@ public class ContactUsFormSteps {
 
 ContactUsFormPage contactUsFormPage;
 
-   WebDriver driver = Driver.getDriver();
+   private static WebDriver driver = Driver.getDriver();
 
     @When("Click on Contact Us button")
     public void clickOnContactUsButton() {
@@ -24,7 +23,7 @@ ContactUsFormPage contactUsFormPage;
 
     @Then("Verify GET IN TOUCH is visible")
     public void verify_GET_IN_TOUCH_is_visible() {
-
+        contactUsFormPage = new ContactUsFormPage(driver);
         contactUsFormPage.verify_GET_IN_TOUCH_is_visible();
 
     }

@@ -14,24 +14,24 @@ import java.util.Map;
 public class ContactUsFormPage {
 
     private Alert alert;
-    private WebDriver driver = Driver.getDriver();
+    private static WebDriver driver = Driver.getDriver();
 
     public ContactUsFormPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
     }
 
-  @FindBy (xpath = "//a[href='/contact_us'])")
+    @FindBy (xpath = "//i[@class='fa fa-envelope']")
     public WebElement contactUsBtn;
-  @FindBy (xpath = "//div[@class='contact-form']/ h2[@class='title text-center']")
+    @FindBy (xpath = "//div[@class='contact-form']/ h2[@class='title text-center']")
     public WebElement getInTouchText;
-  @FindBy (xpath = "//input[@placeholder='Name']")
+    @FindBy (xpath = "//input[@placeholder='Name']")
     public WebElement nameInput;
-  @FindBy (xpath = "//input[@placeholder='Email']")
+    @FindBy (xpath = "//input[@placeholder='Email']")
     public WebElement emailInput;
-   @FindBy (xpath = "//input[@placeholder='Subject']")
+    @FindBy (xpath = "//input[@placeholder='Subject']")
     public WebElement subjectInput;
-   @FindBy (xpath = "//textarea[@id='message']")
+    @FindBy (xpath = "//textarea[@id='message']")
     public WebElement msgInput;
     @FindBy (name = "upload_file")
     public WebElement uploadFileBtn;
@@ -39,11 +39,14 @@ public class ContactUsFormPage {
     public WebElement submitBtn;
     @FindBy (xpath = "//div[@class='status alert alert-success']")
     public WebElement successMsg;
+    @FindBy (xpath = "//a[contains(text(),'Home')]")
+    public WebElement homeBtn;
 
 
 
 
     public void clickOnContactUsButton() {
+
         contactUsBtn.click();
     }
 
@@ -67,7 +70,7 @@ public class ContactUsFormPage {
 
 
     public void upload_file() {
-        String filepath = "src/main/resources/UploadFile/School Pre Enroll.pdf";
+        String filepath = "C:\\Users\\nkati\\Downloads\\batch7-bdd-group-project\\src\\main\\resources\\UploadFile\\School Pre Enroll.pdf";
         uploadFileBtn.sendKeys(filepath);
     }
 
@@ -92,9 +95,9 @@ public class ContactUsFormPage {
 
 
     public void click_Home_button_and_verify_that_landed_to_home_page_successfully() {
+      homeBtn.click();
+      Assert.assertTrue(homeBtn.isSelected());
 
-
-     Driver.quitDriver();
     }
 
 

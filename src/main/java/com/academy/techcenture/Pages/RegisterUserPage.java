@@ -9,38 +9,44 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
 import java.util.List;
 import java.util.Map;
 
 ;
 
 public class RegisterUserPage {
+
+    private static WebDriver driver = Driver.getDriver();
     Faker faker;
-    private WebDriver driver = Driver.getDriver();
 
     public RegisterUserPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
     }
 
-    @FindBy(xpath = "//button[text()='Signup']")
+    @FindBy(xpath = "//a[contains(text(),'Signup / Login')]")
     public WebElement signUpBtn;
     @FindBy (xpath ="//a[normalize-space()='Signup / Login']" )
     public WebElement signUpLoginBtn;
-    @FindBy (xpath = "//h2[normalize-space()='New User Signup!']")
+    @FindBy (xpath = "//h2[contains(.,'New User Signup!')]")
     public WebElement newUserVisibleTxt;
-    @FindBy (xpath = "//input[@name='name']")
-    public WebElement fullName;
+    @FindBy (xpath = "//input[@data-qa='signup-name']")
+    public WebElement nameInput;
     @FindBy(xpath = "//input[@data-qa='signup-email']")
     public WebElement eMail;
+    @FindBy (xpath = "//a[contains(text(),'Home')]")
+    public WebElement homeBtn;
 
 
 
 
-    public void getTitleOnHomePage() {
 
-        Assert.assertEquals("Automation Exercise", driver.getTitle());
+   public void verify_that_home_page_is_visible_successfully() throws InterruptedException {
+       Thread.sleep(1_000);
+       Assert.assertEquals("Home", homeBtn.getText());
     }
+
     public void clickOnSignupLoginButton() {
 
         signUpLoginBtn.click();
@@ -48,12 +54,19 @@ public class RegisterUserPage {
 
     public void verifyNewUserTextIsVisible() {
 
-        Assert.assertTrue(newUserVisibleTxt.isDisplayed());
+       Assert.assertTrue(newUserVisibleTxt.isDisplayed());
     }
 
-    public void enter_and_address(String name, String email) {
-        fullName.sendKeys(name); eMail.sendKeys(email);
+
+
+    public void enter_name_and_email_address() {
+        faker = new Faker();
+        String name1 = faker.name().firstName();
+        String emailAddress = faker.internet().emailAddress();
+        nameInput.sendKeys(name1);
+        eMail.sendKeys(emailAddress);
     }
+
 
 
     public void clickSignupButton() throws InterruptedException {
@@ -63,8 +76,7 @@ public class RegisterUserPage {
     }
 
 
-    public void verifyThatIsVisible() throws InterruptedException {
-        Thread.sleep(2_000);
+    public void verify_Login_to_your_account_is_visible () {
         WebElement enterAccountInfoText = driver.findElement(By.xpath("//div/h2/b[text()='Enter Account Information']"));
         Assert.assertTrue(enterAccountInfoText.isDisplayed());
 

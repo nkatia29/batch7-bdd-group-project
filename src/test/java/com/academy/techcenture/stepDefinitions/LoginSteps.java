@@ -14,7 +14,7 @@ public class LoginSteps {
 //Scenario: Positive scenario with correct email and password
     @Then("Click login button")
     public void click_login_button() {
-        //loginPage = new LoginPage(driver);
+        loginPage = new LoginPage(driver);
         loginPage.click_login_button();
     }
 
@@ -25,7 +25,7 @@ public class LoginSteps {
    }
     @Then("Verify that Logged in as username is visible")
     public void verify_that_Logged_in_as_username_is_visible() {
-        //loginPage = new LoginPage(driver);
+
         loginPage.verify_that_Logged_in_as_username_is_visible();
     }
     // Scenario: Negative scenario  with incorrect email and password

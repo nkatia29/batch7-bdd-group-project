@@ -6,11 +6,11 @@ import org.junit.runner.RunWith;
 
 
 
-    @RunWith(Cucumber.class)
-    @CucumberOptions(
-            features = "src/test/java/com/academy/techcenture/features",
-            glue = "stepDefinitions")
-    public class TestRunner {
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features ={ "src/test/java/com/academy/techcenture/features"},
+        glue = { "com/academy/techcenture/stepDefinitions","Hooks"})
+public class TestRunner {
+}
 
-    }
 
