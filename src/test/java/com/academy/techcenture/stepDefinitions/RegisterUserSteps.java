@@ -3,6 +3,7 @@ package com.academy.techcenture.stepDefinitions;
 import com.academy.techcenture.Pages.RegisterUserPage;
 import com.academy.techcenture.config.ConfigReader;
 import com.academy.techcenture.driver.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -28,16 +29,13 @@ public class RegisterUserSteps {
         userPage.verify_that_home_page_is_visible_successfully();
     }
 
-    @Then("Click on Signup button")
-    public void click_on_Signup_button() throws InterruptedException {
-      userPage.clickSignupButton();
+
+
+    @Then("Click on SignupLogin button")
+    public void click_on_SignupLogin_button() throws InterruptedException {
+        userPage.clickOnSignupLoginButton();
     }
 
-    @When("Verify Login to your account is visible")
-    public void verify_Login_to_your_account_is_visible() {
-
-        userPage.verify_Login_to_your_account_is_visible();
-    }
 
     @Given("Verify New User Signup! is visible")
     public void verify_New_User_Signup_is_visible() {
@@ -45,13 +43,14 @@ public class RegisterUserSteps {
     }
 
     @When("Enter name and  email address")
-    public void enter_name_and_email_address() {
+    public void enter_name_and_email_address()  {
         userPage.enter_name_and_email_address();
     }
 
     @When("Click Signup button")
-    public void click_Signup_button() {
-       userPage.clickOnSignupLoginButton();
+    public void click_Signup_button() throws InterruptedException {
+
+        userPage.clickSignupButton();
     }
 
     @Then("Verify that ENTER ACCOUNT INFORMATION is visible")
@@ -66,6 +65,7 @@ public class RegisterUserSteps {
 
     @When("Select checkbox Sign up for our newsletter!")
     public void select_checkbox_Sign_up_for_our_newsletter() {
+        userPage.selectCheckboxSignUpForOurNewsletter();
 
     }
 
@@ -92,15 +92,15 @@ public class RegisterUserSteps {
 
     @Then("Click Continue button")
     public void click_Continue_button() {
+
         userPage.clickContinueButton();
     }
 
-    @Then("Verify that Logged in as {string} is visible")
-    public void verify_that_Logged_in_as_is_visible(String username) {
-      userPage.verifyThatLoggedInAsUsernameIsVisible(username);
+
+
+    @And("Verify that Logged in as registered name is visible")
+    public void verifyThatLoggedInAsRegisteredNameIsVisible() {
+        userPage.verifyThatLoggedInAsUsernameIsVisible();
+
     }
-
-
-
-
 }

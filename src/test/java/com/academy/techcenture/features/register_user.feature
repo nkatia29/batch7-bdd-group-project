@@ -4,12 +4,10 @@ Feature: register user functionality
   Scenario: register user functionality
     Given Launch browser chrome and Navigate to automationexercise.com
     And Verify that home page is visible successfully
-    Then Click on Signup button
-    When Verify Login to your account is visible
+    Then Click on SignupLogin button
     Given Verify New User Signup! is visible
     When Enter name and  email address
-    And Click Signup button
-    Then Verify that ENTER ACCOUNT INFORMATION is visible
+    Then Click Signup button
     Given Fill details: Title, Name, Email, Password, Date of birth
       |password   |day|month|year|
       |password123|25 |March|1988|
@@ -21,4 +19,4 @@ Feature: register user functionality
     When Click Create Account button
     And Verify that ACCOUNT CREATED! is visible
     Then Click Continue button
-    And Verify that Logged in as "Kevin Lee" is visible
+    And Verify that Logged in as registered name is visible

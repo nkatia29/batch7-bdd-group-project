@@ -62,6 +62,7 @@ ContactUsFormPage contactUsFormPage;
 
     @Then("Click Home button and verify that landed to home page successfully")
     public void click_Home_button_and_verify_that_landed_to_home_page_successfully() {
+        contactUsFormPage.click_Home_button_and_verify_that_landed_to_home_page_successfully();
 
 
     }

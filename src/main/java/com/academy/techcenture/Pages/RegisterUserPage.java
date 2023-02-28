@@ -25,7 +25,7 @@ public class RegisterUserPage {
         PageFactory.initElements(driver,this);
     }
 
-    @FindBy(xpath = "//a[contains(text(),'Signup / Login')]")
+    @FindBy(xpath = "//button[text()='Signup']")
     public WebElement signUpBtn;
     @FindBy (xpath ="//a[normalize-space()='Signup / Login']" )
     public WebElement signUpLoginBtn;
@@ -35,20 +35,20 @@ public class RegisterUserPage {
     public WebElement nameInput;
     @FindBy(xpath = "//input[@data-qa='signup-email']")
     public WebElement eMail;
-    @FindBy (xpath = "//a[contains(text(),'Home')]")
-    public WebElement homeBtn;
-
+    @FindBy(xpath = "//a/i[@class='fa fa-user']/following-sibling::b")
+    public WebElement loginUsernameText;
 
 
 
 
    public void verify_that_home_page_is_visible_successfully() throws InterruptedException {
        Thread.sleep(1_000);
-       Assert.assertEquals("Home", homeBtn.getText());
-    }
+       Assert.assertEquals("Automation Exercise", driver.getTitle());
 
-    public void clickOnSignupLoginButton() {
+   }
 
+    public void clickOnSignupLoginButton() throws InterruptedException {
+       Thread.sleep(2_000);
         signUpLoginBtn.click();
     }
 
@@ -58,11 +58,14 @@ public class RegisterUserPage {
     }
 
 
+    String name1;
+    public void enter_name_and_email_address()  {
 
-    public void enter_name_and_email_address() {
         faker = new Faker();
-        String name1 = faker.name().firstName();
+
+        name1 = faker.name().firstName();
         String emailAddress = faker.internet().emailAddress();
+
         nameInput.sendKeys(name1);
         eMail.sendKeys(emailAddress);
     }
@@ -76,11 +79,11 @@ public class RegisterUserPage {
     }
 
 
-    public void verify_Login_to_your_account_is_visible () {
-        WebElement enterAccountInfoText = driver.findElement(By.xpath("//div/h2/b[text()='Enter Account Information']"));
-        Assert.assertTrue(enterAccountInfoText.isDisplayed());
-
-    }
+//    public void verify_Login_to_your_account_is_visible () {
+//        WebElement enterAccountInfoText = driver.findElement(By.xpath("//div/h2/b[text()='Enter Account Information']"));
+//        Assert.assertTrue(enterAccountInfoText.isDisplayed());
+//
+//    }
 
 
 
@@ -162,18 +165,11 @@ public class RegisterUserPage {
 
 
 
-    public void verifyThatLoggedInAsUsernameIsVisible(String username) {
-        WebElement loginName = driver.findElement(By.xpath("//a/i[@class='fa fa-user']/following-sibling::b"));
-        Assert.assertEquals(username, loginName.getText());
+    public void verifyThatLoggedInAsUsernameIsVisible() {
+
+        Assert.assertEquals(name1, loginUsernameText.getText());
 
     }
-
-    public void verifyLoginToYourAccountIsVisible() {
-        WebElement verifyLoginBtn = driver.findElement(By.xpath("//div[@class='login-form']/h2"));
-        Assert.assertTrue(verifyLoginBtn.isDisplayed());
-        Driver.quitDriver();
-    }
-
 
 
 

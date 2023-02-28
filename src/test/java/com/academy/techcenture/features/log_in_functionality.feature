@@ -3,7 +3,7 @@ Feature: log in functionality
  Background:
   Given Launch browser chrome and Navigate to automationexercise.com
   And Verify that home page is visible successfully
-  Then Click on Signup button
+  Then Click on SignupLogin button
   When Verify Login to your account is visible
 
 

@@ -95,6 +95,7 @@ public class ContactUsFormPage {
 
 
     public void click_Home_button_and_verify_that_landed_to_home_page_successfully() {
+
       homeBtn.click();
       Assert.assertTrue(homeBtn.isSelected());
 
