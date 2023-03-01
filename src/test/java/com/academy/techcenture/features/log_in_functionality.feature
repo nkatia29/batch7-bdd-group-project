@@ -11,6 +11,7 @@ Feature: log in functionality
   Then  Enter "kevin.lee@gmail.com" and "password123" correctly
   Then Click login button
   Then Verify that Logged in as username is visible
+  Then Click Logout account button
 
 
  Scenario: Negative scenario  with incorrect email and password
@@ -18,6 +19,7 @@ Feature: log in functionality
  Then  Enter "kevin.lee@gmail.com" email address and "kevin123" incorrect password
   Then Click login button
  Then Verify error Your email or password is incorrect! is visible
+
 
  Scenario: Logout User
 

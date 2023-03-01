@@ -50,7 +50,10 @@ public class LoginPage {
 
 
     public void enterEmailAddressAndIncorrectPasswordThenClickLoginButton(String username, String password) {
-        emailInput.sendKeys(username); passwordInput.sendKeys(password);
+        emailInput.clear();
+        emailInput.sendKeys(username);
+        passwordInput.clear();
+        passwordInput.sendKeys(password);
     }
 
 
